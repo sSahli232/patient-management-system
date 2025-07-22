@@ -34,6 +34,8 @@ export class CreatePatientUseCase {
   ) {}
 
   async execute(request: Request) {
+    const id = this.idGenerator.generate();
+
     await this.patientRepository.save(
       new Patient({
         id: this.idGenerator.generate(),
@@ -46,7 +48,7 @@ export class CreatePatientUseCase {
     );
 
     return {
-      id: this.idGenerator.generate(),
+      id,
     };
   }
 }
