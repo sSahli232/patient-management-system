@@ -9,4 +9,8 @@ type PatientProps = {
 
 export class Patient {
   constructor(public props: PatientProps) {}
+
+  dateOfBirthInFuture(now: Date): boolean {
+    return this.props.dateOfBirth > now;
+  }
 }

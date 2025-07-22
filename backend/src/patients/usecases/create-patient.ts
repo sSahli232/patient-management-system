@@ -25,21 +25,20 @@ export class CreatePatientUseCase {
   async execute(request: Request): Promise<Response> {
     const id = this.idGenerator.generate();
     const now = this.datGenerator.now();
+    const patient = new Patient({
+      id: this.idGenerator.generate(),
+      firstName: request.firstName,
+      lastName: request.lastName,
+      email: request.email,
+      phoneNumber: request.phoneNumber,
+      dateOfBirth: request.dateOfBirth,
+    });
 
-    if (request.dateOfBirth > now) {
+    if (patient.dateOfBirthInFuture(now)) {
       throw new Error('Date of birth cannot be in the future!');
     }
 
-    await this.patientRepository.save(
-      new Patient({
-        id: this.idGenerator.generate(),
-        firstName: request.firstName,
-        lastName: request.lastName,
-        email: request.email,
-        phoneNumber: request.phoneNumber,
-        dateOfBirth: request.dateOfBirth,
-      }),
-    );
+    await this.patientRepository.save(patient);
 
     return {
       id,
