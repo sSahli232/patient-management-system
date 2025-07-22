@@ -36,7 +36,7 @@ export class CreatePatientUseCase {
     const id = this.idGenerator.generate();
     const now = this.datGenerator.now();
     const patient = new Patient({
-      id: this.idGenerator.generate(),
+      id,
       firstName: request.firstName,
       lastName: request.lastName,
       email: request.email,

@@ -1,19 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Test } from '@nestjs/testing';
-// import { PatientsModule } from 'src/patients/patients.module';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
+import { TestApp } from './utils/test-app';
+import { InMemoryPatientRepository } from '../src/patients/adapters/in-memory-patient-repository';
+import { I_PATIENT_REPOSITORY } from '../src/patients/ports/patient-repository.interface';
 
 describe('Feature: creating a patient', () => {
+  let app: TestApp;
+
+  beforeEach(async () => {
+    app = new TestApp();
+    await app.setup();
+  });
+
+  afterEach(async () => {
+    await app.cleanup();
+  });
+
   it('should create a patient', async () => {
-    const module = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    const app = module.createNestApplication();
-    await app.init();
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const result = await request(app.getHttpServer())
       .post('/patients')
       .send({
@@ -27,6 +32,20 @@ describe('Feature: creating a patient', () => {
     expect(result.status).toBe(201);
     expect(result.body).toEqual({
       id: expect.any(String),
+    });
+
+    const patientRepository =
+      app.get<InMemoryPatientRepository>(I_PATIENT_REPOSITORY);
+    const patient = await patientRepository.findById(result.body.id);
+
+    expect(patient).toBeDefined();
+    expect(patient?.props).toEqual({
+      id: result.body.id,
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'johndoe@gmail.com',
+      phoneNumber: '+33102030405',
+      dateOfBirth: '1980-03-01T00:00:00.000Z',
     });
   });
 });
