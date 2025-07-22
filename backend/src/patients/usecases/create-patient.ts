@@ -27,13 +27,17 @@ type Request = {
   dateOfBirth: Date;
 };
 
+type Response = {
+  id: string;
+};
+
 export class CreatePatientUseCase {
   constructor(
     private readonly patientRepository: IPatientRepository,
     private readonly idGenerator: IIDGenerator,
   ) {}
 
-  async execute(request: Request) {
+  async execute(request: Request): Promise<Response> {
     const id = this.idGenerator.generate();
 
     await this.patientRepository.save(
