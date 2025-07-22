@@ -42,9 +42,9 @@ describe('Feature: Creating a patient', () => {
     it('should insert the patient into the database', async () => {
       await useCase.execute(payload);
 
-      const createdPatient = patientRespository.database[1];
+      const createdPatient = await patientRespository.findById('patient-id-1');
 
-      expect(createdPatient.props).toEqual({
+      expect(createdPatient?.props).toEqual({
         id: 'patient-id-1',
         firstName: 'John',
         lastName: 'Doe',
