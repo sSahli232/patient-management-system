@@ -1,8 +1,8 @@
+import { Patient } from '../entities/patient.entity';
 import {
   CreatePatientUseCase,
   IIDGenerator,
   IPatientRepository,
-  Patient,
 } from './create-patient';
 
 class InMemoryPatientRepository implements IPatientRepository {

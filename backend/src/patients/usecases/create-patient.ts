@@ -1,15 +1,4 @@
-type PatientProps = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  dateOfBirth: Date;
-};
-
-export class Patient {
-  constructor(public props: PatientProps) {}
-}
+import { Patient } from '../entities/patient.entity';
 
 export interface IPatientRepository {
   save(patient: Patient): Promise<void>;
