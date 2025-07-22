@@ -1,6 +1,6 @@
 import { DateOfBirthInFutureException } from '../exceptions/date-of-birth-in-future';
 import { PatientNotFoundException } from '../exceptions/patient-not-found';
-import { IDateGenerator } from '../ports/date-generator.interface';
+import { IDateGenerator } from '../../core/ports/date-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
 
 type Request = {

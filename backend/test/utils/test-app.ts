@@ -1,35 +1,53 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
-import { AppModule } from '../../src/app.module';
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppModule } from '../../src/core/app.module';
 import { IFixture } from './fixture';
 
 export class TestApp {
   private app: INestApplication;
+  private moduleRef: TestingModule;
 
-  async setup() {
-    const module = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+  async setup(): Promise<void> {
+    try {
+      this.moduleRef = await Test.createTestingModule({
+        imports: [AppModule],
+      }).compile();
 
-    this.app = module.createNestApplication();
-    await this.app.init();
+      this.app = this.moduleRef.createNestApplication();
+      await this.app.init();
+    } catch (error) {
+      console.error('Setup failed:', error);
+      throw error;
+    }
   }
 
-  async cleanup() {
-    await this.app.close();
+  async cleanup(): Promise<void> {
+    if (this.app) {
+      await this.app.close();
+    }
+    if (this.moduleRef) {
+      await this.moduleRef.close();
+    }
   }
 
-  async loadFixtures(fixtures: IFixture[]) {
+  async loadFixtures(fixtures: IFixture[]): Promise<unknown[]> {
+    if (!this.app) {
+      throw new Error('Application not initialized. Call setup() first.');
+    }
     return Promise.all(fixtures.map((fixture) => fixture.load(this)));
   }
 
-  get<T>(name: any) {
-    return this.app.get<T>(name);
+  get<T>(token: any): T {
+    if (!this.app) {
+      throw new Error('Application not initialized. Call setup() first.');
+    }
+    return this.app.get<T>(token);
   }
 
-  getHttpServer() {
+  getHttpServer(): any {
+    if (!this.app) {
+      throw new Error('Application not initialized. Call setup() first.');
+    }
     return this.app.getHttpServer();
   }
 }

@@ -1,7 +1,7 @@
 import { CreatePatientUseCase } from './create-patient';
 import { InMemoryPatientRepository } from '../adapters/in-memory-patient-repository';
-import { FixedIDGenerator } from '../adapters/fixed-id-generator';
-import { FixedDateGenerator } from '../adapters/fixed-date-generator';
+import { FixedIDGenerator } from '../../core/adapters/fixed-id-generator';
+import { FixedDateGenerator } from '../../core/adapters/fixed-date-generator';
 import { Patient } from '../entities/patient.entity';
 
 describe('Feature: Creating a patient', () => {

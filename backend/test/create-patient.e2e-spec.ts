@@ -3,8 +3,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as request from 'supertest';
 import { TestApp } from './utils/test-app';
-import { InMemoryPatientRepository } from '../src/patients/adapters/in-memory-patient-repository';
-import { I_PATIENT_REPOSITORY } from '../src/patients/ports/patient-repository.interface';
+import {
+  I_PATIENT_REPOSITORY,
+  IPatientRepository,
+} from '../src/patients/ports/patient-repository.interface';
 
 describe('Feature: creating a patient', () => {
   let app: TestApp;
@@ -34,8 +36,7 @@ describe('Feature: creating a patient', () => {
       id: expect.any(String),
     });
 
-    const patientRepository =
-      app.get<InMemoryPatientRepository>(I_PATIENT_REPOSITORY);
+    const patientRepository = app.get<IPatientRepository>(I_PATIENT_REPOSITORY);
     const patient = await patientRepository.findById(result.body.id);
 
     expect(patient).toBeDefined();

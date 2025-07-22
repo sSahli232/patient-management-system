@@ -1,5 +1,6 @@
 import { PatientFixture } from '../fixtures/patient.fixture';
 import { Patient } from '../../src/patients/entities/patient.entity';
+
 export const e2ePatients = {
   johnDoe: new PatientFixture(
     new Patient({

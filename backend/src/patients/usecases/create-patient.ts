@@ -1,8 +1,8 @@
 import { Patient } from '../entities/patient.entity';
 import { DateOfBirthInFutureException } from '../exceptions/date-of-birth-in-future';
 import { PatientAlreadyExistsException } from '../exceptions/patient-already-exists';
-import { IDateGenerator } from '../ports/date-generator.interface';
-import { IIDGenerator } from '../ports/id-generator.interface';
+import { IDateGenerator } from '../../core/ports/date-generator.interface';
+import { IIDGenerator } from '../../core/ports/id-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
 
 type Request = {

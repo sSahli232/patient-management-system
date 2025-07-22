@@ -1,4 +1,4 @@
-import { FixedDateGenerator } from '../adapters/fixed-date-generator';
+import { FixedDateGenerator } from '../../core/adapters/fixed-date-generator';
 import { InMemoryPatientRepository } from '../adapters/in-memory-patient-repository';
 import { Patient } from '../entities/patient.entity';
 import { UpdatePatientUseCase } from './update-patient';
