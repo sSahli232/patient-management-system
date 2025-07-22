@@ -1,5 +1,5 @@
-import { Patient } from '../patients/entities/patient.entity';
-import { IPatientRepository } from '../patients/ports/patient-repository.interface';
+import { Patient } from '../entities/patient.entity';
+import { IPatientRepository } from '../ports/patient-repository.interface';
 
 export class InMemoryPatientRepository implements IPatientRepository {
   constructor(public readonly database: Patient[] = []) {}

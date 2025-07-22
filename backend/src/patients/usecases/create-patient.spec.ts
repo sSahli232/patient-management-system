@@ -1,7 +1,7 @@
 import { CreatePatientUseCase } from './create-patient';
-import { InMemoryPatientRepository } from '../../adapters/in-memory-patient-repository';
-import { FixedIDGenerator } from '../../adapters/fixed-id-generator';
-import { FixedDateGenerator } from '../../adapters/fixed-date-generator';
+import { InMemoryPatientRepository } from '../adapters/in-memory-patient-repository';
+import { FixedIDGenerator } from '../adapters/fixed-id-generator';
+import { FixedDateGenerator } from '../adapters/fixed-date-generator';
 
 describe('Feature: Creating a patient', () => {
   let patientRespository: InMemoryPatientRepository;
