@@ -1,4 +1,5 @@
 import { Patient } from '../entities/patient.entity';
+import { IDateGenerator } from '../ports/date-generator.interface';
 import { IIDGenerator } from '../ports/id-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
 
@@ -18,12 +19,14 @@ export class CreatePatientUseCase {
   constructor(
     private readonly patientRepository: IPatientRepository,
     private readonly idGenerator: IIDGenerator,
+    private readonly datGenerator: IDateGenerator,
   ) {}
 
   async execute(request: Request): Promise<Response> {
     const id = this.idGenerator.generate();
+    const now = this.datGenerator.now();
 
-    if (request.dateOfBirth > new Date()) {
+    if (request.dateOfBirth > now) {
       throw new Error('Date of birth cannot be in the future!');
     }
 

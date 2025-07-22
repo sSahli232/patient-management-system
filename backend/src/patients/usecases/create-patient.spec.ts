@@ -1,16 +1,23 @@
 import { CreatePatientUseCase } from './create-patient';
 import { InMemoryPatientRepository } from '../../adapters/in-memory-patient-repository';
 import { FixedIDGenerator } from '../../adapters/fixed-id-generator';
+import { FixedDateGenerator } from '../../adapters/fixed-date-generator';
 
 describe('Feature: Creating a patient', () => {
   let patientRespository: InMemoryPatientRepository;
   let idGenerator: FixedIDGenerator;
+  let dateGenerator: FixedDateGenerator;
   let useCase: CreatePatientUseCase;
 
   beforeEach(() => {
     patientRespository = new InMemoryPatientRepository();
     idGenerator = new FixedIDGenerator();
-    useCase = new CreatePatientUseCase(patientRespository, idGenerator);
+    dateGenerator = new FixedDateGenerator();
+    useCase = new CreatePatientUseCase(
+      patientRespository,
+      idGenerator,
+      dateGenerator,
+    );
   });
 
   describe('Scenario: Happy path', () => {
