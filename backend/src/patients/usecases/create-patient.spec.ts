@@ -1,6 +1,7 @@
 import { Patient } from '../entities/patient.entity';
+import { IIDGenerator } from '../ports/id-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
-import { CreatePatientUseCase, IIDGenerator } from './create-patient';
+import { CreatePatientUseCase } from './create-patient';
 
 class InMemoryPatientRepository implements IPatientRepository {
   constructor(public readonly database: Patient[] = []) {}

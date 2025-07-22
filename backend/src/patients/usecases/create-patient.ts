@@ -1,9 +1,6 @@
 import { Patient } from '../entities/patient.entity';
+import { IIDGenerator } from '../ports/id-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
-
-export interface IIDGenerator {
-  generate(): string;
-}
 
 type Request = {
   firstName: string;
