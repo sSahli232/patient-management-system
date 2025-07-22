@@ -1,11 +1,6 @@
 import { CreatePatientUseCase } from './create-patient';
-import { IIDGenerator } from '../ports/id-generator.interface';
 import { InMemoryPatientRepository } from '../../adapters/in-memory-patient-repository';
-class FixedIDGenerator implements IIDGenerator {
-  generate(): string {
-    return 'patient-id-1';
-  }
-}
+import { FixedIDGenerator } from '../../adapters/fixed-id-generator';
 
 describe('Feature: Creating a patient', () => {
   describe('Scenario: Happy path', () => {
