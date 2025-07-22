@@ -72,4 +72,21 @@ describe('Feature: updating a patient', () => {
       await expectPatientToRemainUnchanged();
     });
   });
+
+  describe('Scenario: The patient does not exist', () => {
+    const payload = {
+      id: 'patient-id-2',
+      firstName: 'Janet',
+      lastName: 'Doe',
+      email: 'janetdoe@mail.com',
+      phoneNumber: '1234567891',
+      dateOfBirth: new Date('1985-07-24T00:00:00.000Z'),
+    };
+
+    it('should throw', async () => {
+      await expect(useCase.execute(payload)).rejects.toThrow(
+        'Patient not found!',
+      );
+    });
+  });
 });

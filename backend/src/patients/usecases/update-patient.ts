@@ -22,10 +22,14 @@ export class UpdatePatientUseCase {
   async execute(request: Request): Promise<Response> {
     const { id, firstName, lastName, email, phoneNumber, dateOfBirth } =
       request;
-    const patient = await this.patientRepository.findById(request.id);
     const now = this.dateGenerator.now();
+    const patient = await this.patientRepository.findById(request.id);
 
-    patient?.update({
+    if (!patient) {
+      throw new Error('Patient not found!');
+    }
+
+    patient.update({
       id,
       firstName,
       lastName,
@@ -34,10 +38,10 @@ export class UpdatePatientUseCase {
       dateOfBirth,
     });
 
-    if (patient?.dateOfBirthInFuture(now)) {
+    if (patient.dateOfBirthInFuture(now)) {
       throw new DateOfBirthInFutureException();
     }
 
-    await this.patientRepository.update(patient!);
+    await this.patientRepository.update(patient);
   }
 }
