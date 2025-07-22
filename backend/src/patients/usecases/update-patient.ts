@@ -1,4 +1,5 @@
 import { DateOfBirthInFutureException } from '../exceptions/date-of-birth-in-future';
+import { PatientNotFoundException } from '../exceptions/patient-not-found';
 import { IDateGenerator } from '../ports/date-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
 
@@ -26,7 +27,7 @@ export class UpdatePatientUseCase {
     const patient = await this.patientRepository.findById(request.id);
 
     if (!patient) {
-      throw new Error('Patient not found!');
+      throw new PatientNotFoundException();
     }
 
     patient.update({
