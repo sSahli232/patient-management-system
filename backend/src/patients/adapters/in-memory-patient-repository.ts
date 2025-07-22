@@ -8,6 +8,14 @@ export class InMemoryPatientRepository implements IPatientRepository {
     this.database.push(patient);
   }
 
+  async update(patient: Patient): Promise<void> {
+    const index = this.database.findIndex(
+      (w) => w.props.id === patient.props.id,
+    );
+    this.database[index] = patient;
+    patient.commit();
+  }
+
   async findById(id: string): Promise<Patient | null> {
     const patient = this.database.find((p) => p.props.id === id);
     return patient ? new Patient(patient.props) : null;

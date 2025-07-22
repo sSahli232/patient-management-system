@@ -1,3 +1,4 @@
+import { Entity } from '../../shared/entity';
 type PatientProps = {
   id: string;
   firstName: string;
@@ -7,9 +8,7 @@ type PatientProps = {
   dateOfBirth: Date;
 };
 
-export class Patient {
-  constructor(public props: PatientProps) {}
-
+export class Patient extends Entity<PatientProps> {
   dateOfBirthInFuture(now: Date): boolean {
     return this.props.dateOfBirth > now;
   }
