@@ -1,4 +1,5 @@
 import { Entity } from '../../shared/entity';
+
 type PatientProps = {
   id: string;
   firstName: string;

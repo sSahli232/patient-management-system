@@ -1,3 +1,5 @@
+import { DateOfBirthInFutureException } from '../exceptions/date-of-birth-in-future';
+import { IDateGenerator } from '../ports/date-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
 
 type Request = {
@@ -12,12 +14,16 @@ type Request = {
 type Response = void;
 
 export class UpdatePatientUseCase {
-  constructor(private readonly patientRepository: IPatientRepository) {}
+  constructor(
+    private readonly patientRepository: IPatientRepository,
+    private readonly dateGenerator: IDateGenerator,
+  ) {}
 
   async execute(request: Request): Promise<Response> {
     const { id, firstName, lastName, email, phoneNumber, dateOfBirth } =
       request;
     const patient = await this.patientRepository.findById(request.id);
+    const now = this.dateGenerator.now();
 
     patient?.update({
       id,
@@ -27,6 +33,10 @@ export class UpdatePatientUseCase {
       phoneNumber,
       dateOfBirth,
     });
+
+    if (patient?.dateOfBirthInFuture(now)) {
+      throw new DateOfBirthInFutureException();
+    }
 
     await this.patientRepository.update(patient!);
   }
