@@ -1,8 +1,5 @@
 import { Patient } from '../entities/patient.entity';
-
-export interface IPatientRepository {
-  save(patient: Patient): Promise<void>;
-}
+import { IPatientRepository } from '../ports/patient-repository.interface';
 
 export interface IIDGenerator {
   generate(): string;
