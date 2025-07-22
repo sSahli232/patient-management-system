@@ -1,0 +1,8 @@
+{
+  "files.eol": "\n",
+  "prettier.endOfLine": "auto",
+  "editor.trimAutoWhitespace": false,
+  "editor.insertSpaces": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+}
