@@ -1,4 +1,5 @@
 import { Patient } from '../entities/patient.entity';
+import { DateOfBirthInFutureException } from '../exceptions/date-of-birth-in-future';
 import { IDateGenerator } from '../ports/date-generator.interface';
 import { IIDGenerator } from '../ports/id-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
@@ -35,7 +36,7 @@ export class CreatePatientUseCase {
     });
 
     if (patient.dateOfBirthInFuture(now)) {
-      throw new Error('Date of birth cannot be in the future!');
+      throw new DateOfBirthInFutureException();
     }
 
     await this.patientRepository.save(patient);
