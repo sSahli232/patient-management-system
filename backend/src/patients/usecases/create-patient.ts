@@ -44,5 +44,9 @@ export class CreatePatientUseCase {
         dateOfBirth: request.dateOfBirth,
       }),
     );
+
+    return {
+      id: this.idGenerator.generate(),
+    };
   }
 }
