@@ -43,4 +43,20 @@ describe('Feature: Creating a patient', () => {
       expect(result.id).toEqual('patient-id-1');
     });
   });
+
+  describe('Scenario: The date of birth cannot be in the future', () => {
+    const payload = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'johndoe@mail.com',
+      phoneNumber: '1234567890',
+      dateOfBirth: new Date('2025-07-24T00:00:00.000Z'),
+    };
+
+    it('should throw', async () => {
+      await expect(useCase.execute(payload)).rejects.toThrow(
+        'Date of birth cannot be in the future!',
+      );
+    });
+  });
 });
