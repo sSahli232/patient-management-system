@@ -1,5 +1,6 @@
 import { Patient } from '../entities/patient.entity';
 import { DateOfBirthInFutureException } from '../exceptions/date-of-birth-in-future';
+import { PatientAlreadyExistsException } from '../exceptions/patient-already-exists';
 import { IDateGenerator } from '../ports/date-generator.interface';
 import { IIDGenerator } from '../ports/id-generator.interface';
 import { IPatientRepository } from '../ports/patient-repository.interface';
@@ -24,6 +25,14 @@ export class CreatePatientUseCase {
   ) {}
 
   async execute(request: Request): Promise<Response> {
+    const existingPatient = await this.patientRepository.findByEmailAddress(
+      request.email,
+    );
+
+    if (existingPatient?.props.email === request.email) {
+      throw new PatientAlreadyExistsException();
+    }
+
     const id = this.idGenerator.generate();
     const now = this.datGenerator.now();
     const patient = new Patient({

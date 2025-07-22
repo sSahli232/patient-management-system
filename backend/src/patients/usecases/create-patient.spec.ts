@@ -2,6 +2,7 @@ import { CreatePatientUseCase } from './create-patient';
 import { InMemoryPatientRepository } from '../adapters/in-memory-patient-repository';
 import { FixedIDGenerator } from '../adapters/fixed-id-generator';
 import { FixedDateGenerator } from '../adapters/fixed-date-generator';
+import { Patient } from '../entities/patient.entity';
 
 describe('Feature: Creating a patient', () => {
   let patientRespository: InMemoryPatientRepository;
@@ -9,8 +10,17 @@ describe('Feature: Creating a patient', () => {
   let dateGenerator: FixedDateGenerator;
   let useCase: CreatePatientUseCase;
 
+  const patient = new Patient({
+    id: 'patient-id-0',
+    firstName: 'Janet',
+    lastName: 'Doe',
+    email: 'janetdoe@mail.com',
+    phoneNumber: '1234567891',
+    dateOfBirth: new Date('1985-07-24T00:00:00.000Z'),
+  });
+
   beforeEach(() => {
-    patientRespository = new InMemoryPatientRepository();
+    patientRespository = new InMemoryPatientRepository([patient]);
     idGenerator = new FixedIDGenerator();
     dateGenerator = new FixedDateGenerator();
     useCase = new CreatePatientUseCase(
@@ -32,7 +42,7 @@ describe('Feature: Creating a patient', () => {
     it('should insert the patient into the database', async () => {
       await useCase.execute(payload);
 
-      const createdPatient = patientRespository.database[0];
+      const createdPatient = patientRespository.database[1];
 
       expect(createdPatient.props).toEqual({
         id: 'patient-id-1',
@@ -63,6 +73,22 @@ describe('Feature: Creating a patient', () => {
     it('should throw', async () => {
       await expect(useCase.execute(payload)).rejects.toThrow(
         'Date of birth cannot be in the future!',
+      );
+    });
+  });
+
+  describe('Scenario: The patient already exist', () => {
+    const payload = {
+      firstName: 'Janet',
+      lastName: 'Doe',
+      email: 'janetdoe@mail.com',
+      phoneNumber: '1234567891',
+      dateOfBirth: new Date('1985-07-24T00:00:00.000Z'),
+    };
+
+    it('should throw', async () => {
+      await expect(useCase.execute(payload)).rejects.toThrow(
+        'Unable to process your request. Please try again or contact support.',
       );
     });
   });
