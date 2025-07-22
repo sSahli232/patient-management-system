@@ -8,4 +8,4 @@ export const schema = z.object({
   dateOfBirth: z.date(),
 });
 
-export type CreatePatientBody = z.infer<typeof schema>;
+export type UpdatePatientBody = z.infer<typeof schema>;
