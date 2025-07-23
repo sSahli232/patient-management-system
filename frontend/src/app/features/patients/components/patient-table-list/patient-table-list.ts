@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { openPatientDialog } from '../patient-dialog-form/patient-dialog-form';
 import type { Patient } from '../../models/patient.model';
+import { IfAdminDirective } from '../../../../core/directives/is-admin.directive';
 
 @Component({
   selector: 'app-patient-table-list',
@@ -15,7 +16,8 @@ import type { Patient } from '../../models/patient.model';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    DatePipe
+    DatePipe,
+    IfAdminDirective
   ],
   templateUrl: './patient-table-list.html',
   styleUrl: './patient-table-list.scss'

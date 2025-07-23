@@ -1,26 +1,27 @@
-import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { AuthService } from '../../core/auth/services/auth.service';
+import {
+  Directive,
+  Input,
+  TemplateRef,
+  ViewContainerRef,
+  OnInit
+} from '@angular/core';
+import { AuthService } from '../auth/services/auth.service';
 
 @Directive({
-  selector: '[appAdmin]',
-  standalone: true
+  selector: '[appIfAdmin]'
 })
-export class IsAdminDirective implements OnInit {
+export class IfAdminDirective implements OnInit {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private authService: AuthService
   ) {}
 
-  ngOnInit() {
-    // Check if user is admin
+  ngOnInit(): void {
     const isAdmin = this.authService.isAdmin();
-
     if (isAdmin) {
-      // Show the element
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
-      // Remove the element from the DOM
       this.viewContainer.clear();
     }
   }

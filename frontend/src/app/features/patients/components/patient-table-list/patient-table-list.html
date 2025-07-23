@@ -4,7 +4,7 @@
     <mat-card class="patient-card">
       <div class="card-header">
         <h3>{{ patient.firstName }} {{ patient.lastName }}</h3>
-        <div class="card-actions">
+        <div *appIfAdmin class="card-actions">
           <button mat-button class="edit-button" (click)="onEditPatient(patient)">
             Edit
           </button>
@@ -43,7 +43,7 @@
           <td>{{ patient.phoneNumber }}</td>
           <td>{{ patient.dateOfBirth | date:'mediumDate' }}</td>
           <td class="actions-cell">
-            <div class="table-actions">
+            <div class="table-actions" *appIfAdmin>
               <button mat-button class="edit-button" (click)="onEditPatient(patient)">
                 Edit
               </button>

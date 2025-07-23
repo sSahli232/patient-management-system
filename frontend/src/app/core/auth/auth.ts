@@ -1,15 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { wait } from '../utils/wait';
 
 @Component({
   selector: 'app-auth',
-  imports: [ReactiveFormsModule,
+  imports: [
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -38,9 +40,9 @@ export class Auth {
         this.errorMessage = 'Email and password are required.';
         return;
       }
-      console.log({ email, password })
       await this.authService.login(email, password);
-      await this.router.navigate(['/patients'])
+      await wait(1000);
+      await this.router.navigate(['/patients']);
     } catch (err) {
       this.errorMessage = 'Login failed';
       console.error('Login failed:', err);

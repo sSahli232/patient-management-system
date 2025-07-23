@@ -41,7 +41,6 @@ export class AuthService {
       password
     });
     const user = await firstValueFrom(login$);
-    console.log('user : ', user);
     this.#userSignal.set(user);
     return user;
   }
@@ -63,6 +62,7 @@ export class AuthService {
   }
 
   isAdmin() {
-    return true
+    const user = this.user();
+    return user?.roles.includes('admin');
   }
 }

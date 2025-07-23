@@ -43,8 +43,6 @@ export class PatientDialogForm {
   });
 
   constructor() {
-    console.log(this.data.patient?.dateOfBirth);
-
     this.form.patchValue({
       firstName: this.data.patient?.firstName,
       lastName: this.data.patient?.lastName,

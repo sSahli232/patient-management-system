@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { openPatientDialog } from './components/patient-dialog-form/patient-dialog-form';
-// import { IsAdminDirective } from '../../core/directives/is-admin.directive';
 import type { Patient } from './models/patient.model';
 import { PatientsService } from './services/patients.service';
 import { PatientTableList } from './components/patient-table-list/patient-table-list';
+import { IfAdminDirective } from '../../core/directives/is-admin.directive';
 
 @Component({
   selector: 'app-patients',
-  imports: [PatientTableList],
+  imports: [PatientTableList, IfAdminDirective],
   templateUrl: './patients.html',
   styleUrl: './patients.scss'
 })
