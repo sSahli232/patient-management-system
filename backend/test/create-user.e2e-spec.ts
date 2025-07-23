@@ -4,6 +4,7 @@ import {
   I_USER_REPOSITORY,
   IUserRepository,
 } from '../src/users/ports/user-repository.interface';
+import { e2eUsers } from './seeds/user-seeds.e2e';
 
 describe('Feature: creating a patient', () => {
   let app: TestApp;
@@ -20,8 +21,8 @@ describe('Feature: creating a patient', () => {
   describe('Scenario: Happy path', () => {
     it('should create a user', async () => {
       const result = await request(app.getHttpServer()).post('/users').send({
-        email: 'johndoe@gmail.com',
-        password: 'azerty1234',
+        email: e2eUsers.alice.entity.props.email,
+        password: e2eUsers.alice.entity.props.password,
       });
 
       expect(result.status).toBe(201);
@@ -35,7 +36,7 @@ describe('Feature: creating a patient', () => {
       expect(user).toBeDefined();
       expect(user?.props).toEqual({
         id: result.body.id,
-        email: 'johndoe@gmail.com',
+        email: 'alice@gmail.com',
         password: expect.any(String),
       });
     });

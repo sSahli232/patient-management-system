@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Module } from '@nestjs/common';
 import { UsersController } from './controllers/users.controller';
 import { I_USER_REPOSITORY } from './ports/user-repository.interface';

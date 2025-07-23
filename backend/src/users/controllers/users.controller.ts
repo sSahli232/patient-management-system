@@ -16,7 +16,6 @@ export class UsersController {
   async handleCreateUser(
     @Body() body: CreateUserBody,
   ): Promise<CreateUserResponse> {
-    console.log('in controller');
     return this.createUser.execute({
       email: body.email,
       password: body.password,

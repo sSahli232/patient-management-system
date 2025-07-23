@@ -15,4 +15,11 @@ export const e2eUsers = {
       password: 'azerty',
     }),
   ),
+  aliceWithHashedPassword: new UserFixture(
+    new User({
+      id: 'alice-id',
+      email: 'alice@gmail.com',
+      password: '$2b$10$nxmAvbEnCj1vwIAihoIOROw07IKFlfrgtdPvW03P.KJGlWE/hI0Qa',
+    }),
+  ),
 };
