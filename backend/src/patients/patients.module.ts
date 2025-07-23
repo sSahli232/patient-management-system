@@ -8,6 +8,7 @@ import { I_ID_GENERATOR } from '../core/ports/id-generator.interface';
 import { I_DATE_GENERATOR } from '../core/ports/date-generator.interface';
 import { CommonModule } from '../core/common.module';
 import { UpdatePatientUseCase } from './usecases/update-patient';
+import { DeletePatientUseCase } from './usecases/delete-patient';
 
 @Module({
   imports: [CommonModule],
@@ -35,6 +36,13 @@ import { UpdatePatientUseCase } from './usecases/update-patient';
       inject: [I_PATIENT_REPOSITORY, I_DATE_GENERATOR],
       useFactory(patientRepository, dateGenerator) {
         return new UpdatePatientUseCase(patientRepository, dateGenerator);
+      },
+    },
+    {
+      provide: DeletePatientUseCase,
+      inject: [I_PATIENT_REPOSITORY],
+      useFactory(patientRepository) {
+        return new DeletePatientUseCase(patientRepository);
       },
     },
   ],

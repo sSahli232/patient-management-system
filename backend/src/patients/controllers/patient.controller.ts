@@ -1,16 +1,27 @@
-import { Body, Controller, HttpCode, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CreatePatientUseCase } from '../usecases/create-patient';
 import { CreatePatientBody } from './dtos/create-patient-body';
 import { CreatePatientResponse } from './dtos/create-patient-response';
 import { UpdatePatientResponse } from './dtos/update-patient-response';
 import { UpdatePatientBody } from './dtos/update-patient-body';
 import { UpdatePatientUseCase } from '../usecases/update-patient';
+import { DeletePatientUseCase } from '../usecases/delete-patient';
+import { DeletePatientResponse } from './dtos/delete-patient-response';
 
 @Controller()
 export class PatientController {
   constructor(
     private readonly createPatient: CreatePatientUseCase,
     private readonly updatePatient: UpdatePatientUseCase,
+    private readonly deletePatient: DeletePatientUseCase,
   ) {}
 
   @Post('/patients')
@@ -40,5 +51,12 @@ export class PatientController {
       phoneNumber: body.phoneNumber,
       dateOfBirth: body.dateOfBirth,
     });
+  }
+
+  @Delete('/patients/:id')
+  async handleDeletePatient(
+    @Param('id') id: string,
+  ): Promise<DeletePatientResponse> {
+    return this.deletePatient.execute({ patientId: id });
   }
 }
