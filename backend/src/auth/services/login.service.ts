@@ -1,6 +1,7 @@
 import { IUserRepository } from '../../users/ports/user-repository.interface';
 import { IHashing } from '../../users/ports/hashing.interface';
 import { ITokenGenerator } from '../ports/token-generator.interface';
+import { Role } from '../../../dist/users/entities/user.entity';
 
 const DEFAULT_EXPIRES = '1h';
 
@@ -10,7 +11,10 @@ type Request = {
 };
 
 type Response = {
+  id: string;
+  email: string;
   accessToken: string;
+  roles: Role[];
 };
 
 export class Login {
@@ -48,6 +52,9 @@ export class Login {
     });
 
     return {
+      id: user.props.id,
+      email: user.props.email,
+      roles: user.props.roles,
       accessToken,
     };
   }

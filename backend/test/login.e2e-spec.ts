@@ -26,6 +26,9 @@ describe('Feature: login', () => {
 
       expect(result.status).toBe(200);
       expect(result.body).toEqual({
+        id: e2eUsers.alice.entity.props.id,
+        email: e2eUsers.alice.entity.props.email,
+        roles: e2eUsers.alice.entity.props.roles,
         accessToken: expect.any(String),
       });
     });

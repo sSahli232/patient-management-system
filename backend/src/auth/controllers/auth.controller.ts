@@ -6,13 +6,13 @@ import { Public } from '../decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly login: Login) {}
+  constructor(private readonly loginService: Login) {}
 
   @Public()
   @HttpCode(200)
   @Post('login')
   async handleLogin(@Body() body: LoginBody): Promise<LoginResponse> {
-    return this.login.login({
+    return this.loginService.login({
       email: body.email,
       password: body.password,
     });
