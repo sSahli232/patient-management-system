@@ -5,10 +5,11 @@ import type { Patient } from './models/patient.model';
 import { PatientsService } from './services/patients.service';
 import { PatientTableList } from './components/patient-table-list/patient-table-list';
 import { IfAdminDirective } from '../../core/directives/is-admin.directive';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-patients',
-  imports: [PatientTableList, IfAdminDirective],
+  imports: [PatientTableList, IfAdminDirective, MatButtonModule],
   templateUrl: './patients.html',
   styleUrl: './patients.scss'
 })
