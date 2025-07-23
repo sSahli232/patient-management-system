@@ -54,10 +54,17 @@ describe('Feature: Creating a patient', () => {
       });
     });
 
-    it('should return the patient ID', async () => {
-      const result = await useCase.execute(payload);
+    it('should return the patient', async () => {
+      const patient = await useCase.execute(payload);
 
-      expect(result.id).toEqual('patient-id-1');
+      expect(patient).toEqual({
+        id: 'patient-id-1',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'johndoe@mail.com',
+        phoneNumber: '1234567890',
+        dateOfBirth: new Date('1990-01-01T00:00:00.000Z'),
+      });
     });
   });
 

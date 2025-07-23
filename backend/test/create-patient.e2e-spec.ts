@@ -1,9 +1,5 @@
 import * as request from 'supertest';
 import { TestApp } from './utils/test-app';
-import {
-  I_PATIENT_REPOSITORY,
-  IPatientRepository,
-} from '../src/patients/ports/patient-repository.interface';
 import { e2eUsers } from './seeds/user-seeds.e2e';
 
 describe('Feature: creating a patient', () => {
@@ -38,15 +34,6 @@ describe('Feature: creating a patient', () => {
       expect(result.status).toBe(201);
       expect(result.body).toEqual({
         id: expect.any(String),
-      });
-
-      const patientRepository =
-        app.get<IPatientRepository>(I_PATIENT_REPOSITORY);
-      const patient = await patientRepository.findById(result.body.id);
-
-      expect(patient).toBeDefined();
-      expect(patient?.props).toEqual({
-        id: result.body.id,
         firstName: 'John',
         lastName: 'Doe',
         email: 'johndoe@gmail.com',

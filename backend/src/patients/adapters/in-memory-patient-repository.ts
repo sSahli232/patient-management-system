@@ -4,8 +4,9 @@ import { IPatientRepository } from '../ports/patient-repository.interface';
 export class InMemoryPatientRepository implements IPatientRepository {
   constructor(public readonly database: Patient[] = []) {}
 
-  async save(patient: Patient): Promise<void> {
+  async save(patient: Patient): Promise<Patient> {
     this.database.push(patient);
+    return patient;
   }
 
   async update(patient: Patient): Promise<void> {

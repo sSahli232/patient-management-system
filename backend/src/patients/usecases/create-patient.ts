@@ -15,6 +15,11 @@ type Request = {
 
 type Response = {
   id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  dateOfBirth: Date;
 };
 
 export class CreatePatientUseCase {
@@ -48,10 +53,15 @@ export class CreatePatientUseCase {
       throw new DateOfBirthInFutureException();
     }
 
-    await this.patientRepository.save(patient);
+    const createdPatient = await this.patientRepository.save(patient);
 
     return {
       id,
+      firstName: createdPatient.props.firstName,
+      lastName: createdPatient.props.lastName,
+      email: createdPatient.props.email,
+      phoneNumber: createdPatient.props.phoneNumber,
+      dateOfBirth: createdPatient.props.dateOfBirth,
     };
   }
 }
