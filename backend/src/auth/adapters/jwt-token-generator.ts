@@ -6,14 +6,14 @@ export class JwtTokenGenerator implements ITokenGenerator {
 
   async generate({
     key,
-    expirationInMs,
+    expiresIn,
   }: {
     key: string;
-    expirationInMs: number;
+    expiresIn: number;
   }): Promise<string> {
-    const exirationInSeconds = expirationInMs / 1000;
+    const exiration = expiresIn;
 
-    return sign({ key }, this.secret, { expiresIn: exirationInSeconds });
+    return sign({ key }, this.secret, { expiresIn: exiration });
   }
 
   async validate(token: string): Promise<string> {

@@ -2,6 +2,8 @@ import { IUserRepository } from '../../users/ports/user-repository.interface';
 import { IHashing } from '../../users/ports/hashing.interface';
 import { ITokenGenerator } from '../ports/token-generator.interface';
 
+const DEFAULT_EXPIRES = '1h';
+
 type Request = {
   email: string;
   password: string;
@@ -42,7 +44,7 @@ export class Login {
 
     const accessToken = await this.tokenGenerator.generate({
       key: payload,
-      expirationInMs: 60 * 60 * 1000, // 1h
+      expiresIn: (process.env.JWT_EXPIRES_HOUR as string) ?? DEFAULT_EXPIRES,
     });
 
     return {

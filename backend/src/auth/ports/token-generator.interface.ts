@@ -2,7 +2,7 @@ export const I_TOKEN_GENERATOR = Symbol('I_TOKEN_GENERATOR');
 
 type Input = {
   key: string;
-  expirationInMs: number;
+  expiresIn: number | string;
 };
 
 export interface ITokenGenerator {

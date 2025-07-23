@@ -27,7 +27,7 @@ export class UserFixture implements IFixture {
     };
     const accessToken = await tokenGenerator.generate({
       key: JSON.stringify(payload),
-      expirationInMs: 60 * 60 * 1000,
+      expiresIn: (process.env.JWT_EXPIRES_HOUR as string) ?? '1d',
     });
 
     return `Bearer ${accessToken}`;

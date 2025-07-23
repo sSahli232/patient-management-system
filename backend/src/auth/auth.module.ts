@@ -10,15 +10,16 @@ import { Authenticate } from './services/authenticate.service';
 import { APP_GUARD, Reflector } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { RolesGuard } from './guards/roles.guard';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [UsersModule],
+  imports: [UsersModule, ConfigModule],
   controllers: [AuthController],
   providers: [
     {
       provide: I_TOKEN_GENERATOR,
       useFactory: () => {
-        return new JwtTokenGenerator('very_secret'); // TODO: move the secret in config/env
+        return new JwtTokenGenerator(process.env.JWT_SECRET as string);
       },
     },
     {
