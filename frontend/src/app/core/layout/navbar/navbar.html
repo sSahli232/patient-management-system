@@ -1,0 +1,7 @@
+<mat-toolbar class="soft-blue-toolbar">
+  <span>Patient Management System</span>
+  <span class="spacer"></span>
+  @if(isLoggedIn()) {
+  <button mat-button (click)="onLogout()">Logout</button>
+  }
+</mat-toolbar>
