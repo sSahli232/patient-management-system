@@ -38,12 +38,26 @@ describe('Feature: updating a patient', () => {
       phoneNumber: '0102030405',
       dateOfBirth: new Date('1990-01-01T00:00:00.000Z'),
     };
+
     it('should updtate the patient', async () => {
       await useCase.execute(payload);
 
       const patient = await patientRepository.findById('patient-id-1');
 
       expect(patient!.props).toEqual({
+        id: 'patient-id-1',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'johndoe@mail.com',
+        phoneNumber: '0102030405',
+        dateOfBirth: new Date('1990-01-01T00:00:00.000Z'),
+      });
+    });
+
+    it('should return the patient', async () => {
+      const patient = await useCase.execute(payload);
+
+      expect(patient).toEqual({
         id: 'patient-id-1',
         firstName: 'John',
         lastName: 'Doe',

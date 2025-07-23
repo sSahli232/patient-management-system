@@ -1,1 +1,8 @@
-export type UpdatePatientResponse = void;
+export type UpdatePatientResponse = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  dateOfBirth: Date;
+};

@@ -12,7 +12,14 @@ type Request = {
   dateOfBirth: Date;
 };
 
-type Response = void;
+type Response = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  dateOfBirth: Date;
+};
 
 export class UpdatePatientUseCase {
   constructor(
@@ -43,6 +50,15 @@ export class UpdatePatientUseCase {
       throw new DateOfBirthInFutureException();
     }
 
-    await this.patientRepository.update(patient);
+    const updatedPatient = await this.patientRepository.update(patient);
+
+    return {
+      id: updatedPatient.props.id,
+      firstName: updatedPatient.props.firstName,
+      lastName: updatedPatient.props.lastName,
+      email: updatedPatient.props.email,
+      phoneNumber: updatedPatient.props.phoneNumber,
+      dateOfBirth: updatedPatient.props.dateOfBirth,
+    };
   }
 }

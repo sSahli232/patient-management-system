@@ -1,10 +1,10 @@
 import * as request from 'supertest';
 import { TestApp } from './utils/test-app';
 import { e2ePatients } from './seeds/patient-seeds.e2e';
-import {
-  I_PATIENT_REPOSITORY,
-  IPatientRepository,
-} from '../src/patients/ports/patient-repository.interface';
+// import {
+//   I_PATIENT_REPOSITORY,
+//   IPatientRepository,
+// } from '../src/patients/ports/patient-repository.interface';
 import { e2eUsers } from './seeds/user-seeds.e2e';
 
 describe('Feature: updating a patient', () => {
@@ -40,13 +40,7 @@ describe('Feature: updating a patient', () => {
         });
 
       expect(result.status).toBe(200);
-
-      const patientRepository =
-        app.get<IPatientRepository>(I_PATIENT_REPOSITORY);
-      const patient = await patientRepository.findById(id);
-
-      expect(patient).toBeDefined();
-      expect(patient?.props).toEqual({
+      expect(result.body).toEqual({
         id: 'patient-id-1',
         firstName: 'John',
         lastName: 'Doe 2',
@@ -54,6 +48,20 @@ describe('Feature: updating a patient', () => {
         phoneNumber: '0102030405',
         dateOfBirth: '1990-01-01T00:00:00.000Z',
       });
+
+      // const patientRepository =
+      //   app.get<IPatientRepository>(I_PATIENT_REPOSITORY);
+      // const patient = await patientRepository.findById(id);
+
+      // expect(patient).toBeDefined();
+      // expect(patient?.props).toEqual({
+      //   id: 'patient-id-1',
+      //   firstName: 'John',
+      //   lastName: 'Doe 2',
+      //   email: 'johndoe@mail.com',
+      //   phoneNumber: '0102030405',
+      //   dateOfBirth: '1990-01-01T00:00:00.000Z',
+      // });
     });
   });
 

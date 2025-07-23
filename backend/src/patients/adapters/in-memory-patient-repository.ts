@@ -9,12 +9,13 @@ export class InMemoryPatientRepository implements IPatientRepository {
     return patient;
   }
 
-  async update(patient: Patient): Promise<void> {
+  async update(patient: Patient): Promise<Patient> {
     const index = this.database.findIndex(
       (w) => w.props.id === patient.props.id,
     );
     this.database[index] = patient;
     patient.commit();
+    return patient;
   }
 
   async delete(patient: Patient): Promise<void> {
