@@ -16,6 +16,14 @@ export class InMemoryPatientRepository implements IPatientRepository {
     patient.commit();
   }
 
+  async delete(patient: Patient): Promise<void> {
+    const index = this.database.findIndex(
+      (p) => p.props.id === patient.props.id,
+    );
+
+    this.database.splice(index, 1);
+  }
+
   async findById(id: string): Promise<Patient | null> {
     const patient = this.database.find((p) => p.props.id === id);
     return patient ? new Patient({ ...patient.initialState }) : null;
