@@ -1,4 +1,4 @@
-import { Role } from '../../../../dist/users/entities/user.entity';
+import { Role } from '../../../users/entities/user.entity';
 
 export type LoginResponse = {
   id: string;

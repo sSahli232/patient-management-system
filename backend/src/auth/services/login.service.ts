@@ -1,7 +1,7 @@
 import { IUserRepository } from '../../users/ports/user-repository.interface';
 import { IHashing } from '../../users/ports/hashing.interface';
 import { ITokenGenerator } from '../ports/token-generator.interface';
-import { Role } from '../../../dist/users/entities/user.entity';
+import { Role } from '../../users/entities/user.entity';
 
 const DEFAULT_EXPIRES = '1h';
 
