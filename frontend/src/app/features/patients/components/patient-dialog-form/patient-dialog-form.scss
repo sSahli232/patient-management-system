@@ -18,3 +18,9 @@ mat-dialog-actions {
   margin-top: 16px;
   padding: 8px 0;
 }
+
+.center-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

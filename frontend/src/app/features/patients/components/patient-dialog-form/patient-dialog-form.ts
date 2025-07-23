@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
 import { PatientsService } from '../../services/patients.service';
 import type { Patient } from '../../models/patient.model';
 import { PatientDialogData } from './models/patient-dialog-form.model';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-patient-dialog-form',
@@ -20,7 +21,8 @@ import { PatientDialogData } from './models/patient-dialog-form.model';
     MatDatepickerModule,
     MatDatepicker,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ],
   templateUrl: './patient-dialog-form.html',
   styleUrl: './patient-dialog-form.scss'
