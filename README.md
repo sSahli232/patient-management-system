@@ -25,11 +25,6 @@ git clone https://github.com/sSahli232/patient-management-system.git
 cd patient-management-system
 ```
 
-2. Install dependencies for both frontend and backend:
-```bash
-npm run install:all
-```
-
 ## 💻 Development
 
 Start both frontend and backend servers:
