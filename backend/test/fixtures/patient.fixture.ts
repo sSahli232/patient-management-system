@@ -13,13 +13,4 @@ export class PatientFixture implements IFixture {
     const patientRepository = app.get<IPatientRepository>(I_PATIENT_REPOSITORY);
     await patientRepository.save(this.entity);
   }
-
-  // createAuthorizationToken() {
-  //   return (
-  //     'Basic ' +
-  //     Buffer.from(
-  //       `${this.entity.props.emailAddress}:${this.entity.props.password}`,
-  //     ).toString('base64')
-  //   );
-  // }
 }

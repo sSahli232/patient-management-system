@@ -5,6 +5,7 @@ import {
   I_PATIENT_REPOSITORY,
   IPatientRepository,
 } from '../src/patients/ports/patient-repository.interface';
+import { e2eUsers } from './seeds/user-seeds.e2e';
 
 describe('Feature: updating a patient', () => {
   let app: TestApp;
@@ -12,7 +13,7 @@ describe('Feature: updating a patient', () => {
   beforeEach(async () => {
     app = new TestApp();
     await app.setup();
-    await app.loadFixtures([e2ePatients.johnDoe]);
+    await app.loadFixtures([e2eUsers.alice, e2ePatients.johnDoe]);
   });
 
   afterEach(async () => {
@@ -25,6 +26,10 @@ describe('Feature: updating a patient', () => {
 
       const result = await request(app.getHttpServer())
         .put(`/patients/${id}/edit`)
+        .set(
+          'Authorization',
+          await e2eUsers.alice.createAuthorizationToken(app),
+        )
         .send({
           id,
           firstName: 'John',
@@ -49,6 +54,24 @@ describe('Feature: updating a patient', () => {
         phoneNumber: '0102030405',
         dateOfBirth: '1990-01-01T00:00:00.000Z',
       });
+    });
+  });
+
+  describe('Scenario: the user is not authenticated', () => {
+    it('should reject', async () => {
+      const id = e2ePatients.janetDoe.entity.props.id;
+
+      const result = await request(app.getHttpServer())
+        .put(`/patients/${id}/edit`)
+        .send({
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'johndoe@gmail.com',
+          phoneNumber: '+33102030405',
+          dateOfBirth: new Date('1980-03-01T00:00:00.000Z'),
+        });
+
+      expect(result.status).toBe(401);
     });
   });
 });

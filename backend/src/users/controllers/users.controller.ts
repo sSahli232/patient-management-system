@@ -4,6 +4,7 @@ import { GetUserByIdUseCase } from '../usecases/get-user-by-id';
 import { CreateUserUseCase } from '../usecases/create-user';
 import { CreateUserBody } from './dtos/create-user-body';
 import { CreateUserResponse } from './dtos/create-user-response';
+import { Public } from '../../auth/decorators/public.decorator';
 
 @Controller('users')
 export class UsersController {
@@ -12,6 +13,7 @@ export class UsersController {
     private readonly createUser: CreateUserUseCase,
   ) {}
 
+  @Public()
   @Post()
   async handleCreateUser(
     @Body() body: CreateUserBody,

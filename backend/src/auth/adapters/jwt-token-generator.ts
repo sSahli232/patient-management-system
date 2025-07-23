@@ -1,4 +1,4 @@
-import { sign, verify, JwtPayload } from 'jsonwebtoken';
+import { sign, verify, JwtPayload, decode } from 'jsonwebtoken';
 import { ITokenGenerator } from '../ports/token-generator.interface';
 
 export class JwtTokenGenerator implements ITokenGenerator {
@@ -20,5 +20,10 @@ export class JwtTokenGenerator implements ITokenGenerator {
     const payload = verify(token, this.secret) as JwtPayload;
 
     return payload.key;
+  }
+
+  async decode(token: string): Promise<string> {
+    const result = decode(token) as string;
+    return result;
   }
 }

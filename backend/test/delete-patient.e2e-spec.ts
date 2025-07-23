@@ -5,6 +5,7 @@ import {
   I_PATIENT_REPOSITORY,
   IPatientRepository,
 } from '../src/patients/ports/patient-repository.interface';
+import { e2eUsers } from './seeds/user-seeds.e2e';
 
 describe('Feature: cancelling a patient', () => {
   let app: TestApp;
@@ -12,7 +13,7 @@ describe('Feature: cancelling a patient', () => {
   beforeEach(async () => {
     app = new TestApp();
     await app.setup();
-    await app.loadFixtures([e2ePatients.johnDoe]);
+    await app.loadFixtures([e2eUsers.alice, e2ePatients.johnDoe]);
   });
 
   afterEach(async () => {
@@ -23,10 +24,12 @@ describe('Feature: cancelling a patient', () => {
     it('should succeed', async () => {
       const id = e2ePatients.johnDoe.entity.props.id;
 
-      const result = await request(app.getHttpServer()).delete(
-        `/patients/${id}`,
-      );
-
+      const result = await request(app.getHttpServer())
+        .delete(`/patients/${id}`)
+        .set(
+          'Authorization',
+          await e2eUsers.alice.createAuthorizationToken(app),
+        );
       expect(result.status).toBe(200);
 
       const patientRepository =
@@ -35,6 +38,23 @@ describe('Feature: cancelling a patient', () => {
       const patient = await patientRepository.findById(id);
 
       expect(patient).toBeNull();
+    });
+  });
+
+  describe('Scenario: the user is not authenticated', () => {
+    it('should reject', async () => {
+      const id = e2ePatients.johnDoe.entity.props.id;
+      const result = await request(app.getHttpServer())
+        .delete(`/patients/${id}`)
+        .send({
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'johndoe@gmail.com',
+          phoneNumber: '+33102030405',
+          dateOfBirth: new Date('1980-03-01T00:00:00.000Z'),
+        });
+
+      expect(result.status).toBe(401);
     });
   });
 });

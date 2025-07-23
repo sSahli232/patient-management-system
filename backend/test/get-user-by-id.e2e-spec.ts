@@ -18,13 +18,35 @@ describe('Feature: getting a user by its ID', () => {
   describe('Scenario: Happy path', () => {
     it('should succeed', async () => {
       const id = e2eUsers.alice.entity.props.id;
-      const result = await request(app.getHttpServer()).get(`/users/${id}`);
-
+      const result = await request(app.getHttpServer())
+        .get(`/users/${id}`)
+        .set(
+          'Authorization',
+          await e2eUsers.alice.createAuthorizationToken(app),
+        );
       expect(result.status).toBe(200);
       expect(result.body).toEqual({
         id: 'alice-id',
         email: 'alice@gmail.com',
       });
+    });
+  });
+
+  describe('Scenario: the user is not authenticated', () => {
+    it('should reject', async () => {
+      const id = e2eUsers.alice.entity.props.id;
+
+      const result = await request(app.getHttpServer())
+        .get(`/users/${id}`)
+        .send({
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'johndoe@gmail.com',
+          phoneNumber: '+33102030405',
+          dateOfBirth: new Date('1980-03-01T00:00:00.000Z'),
+        });
+
+      expect(result.status).toBe(401);
     });
   });
 });

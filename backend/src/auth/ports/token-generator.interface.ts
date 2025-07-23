@@ -8,4 +8,5 @@ type Input = {
 export interface ITokenGenerator {
   generate(input: Input): Promise<string>;
   validate(token: string): Promise<string>;
+  decode(token: string): Promise<string>;
 }

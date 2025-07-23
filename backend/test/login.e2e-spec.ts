@@ -20,8 +20,8 @@ describe('Feature: login', () => {
       const result = await request(app.getHttpServer())
         .post('/auth/login')
         .send({
-          email: 'alice@gmail.com',
-          password: 'azerty',
+          email: e2eUsers.alice.entity.props.email,
+          password: e2eUsers.alice.entity.props.password,
         });
 
       expect(result.status).toBe(200);

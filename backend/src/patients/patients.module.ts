@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Module } from '@nestjs/common';
 import { InMemoryPatientRepository } from './adapters/in-memory-patient-repository';
 import { CreatePatientUseCase } from './usecases/create-patient';

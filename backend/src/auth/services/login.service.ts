@@ -34,8 +34,13 @@ export class Login {
       throw new Error('Invalid credentials');
     }
 
+    const payload = JSON.stringify({
+      id: user.props.id,
+      email: user.props.email,
+    });
+
     const accessToken = await this.tokenGenerator.generate({
-      key: user.props.id,
+      key: payload,
       expirationInMs: 60 * 60 * 1000, // 1h
     });
 
