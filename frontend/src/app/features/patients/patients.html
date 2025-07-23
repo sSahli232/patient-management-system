@@ -1,0 +1,11 @@
+<section class="patients-container">
+  <div class="header">
+    <h2>Patient List</h2>
+    <button class="create-button" mat-raised-button (click)="onAddPatient()">
+      Create Patient
+    </button>
+  </div>
+
+  <app-patient-table-list (patientUpdated)="onPatientUpdated($event)" (patientDeleted)="onPatientDeleted($event)" [patients]="patients()" />
+
+</section>

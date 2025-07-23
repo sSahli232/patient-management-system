@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { Auth } from './core/auth/auth';
-import { Patient } from './features/patient/patient';
 import { isUserAuthenticated } from './core/auth/guards/auth.guard';
+import { Patients } from './features/patients/patients';
 
 export const routes: Routes = [
   {
@@ -10,7 +10,7 @@ export const routes: Routes = [
   },
   {
     path: "patients",
-    component: Patient,
+    component: Patients,
     canActivate: [isUserAuthenticated],
   },
 ];
