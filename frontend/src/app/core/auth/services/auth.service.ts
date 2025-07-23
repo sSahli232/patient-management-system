@@ -30,7 +30,7 @@ export class AuthService {
       const user = this.user()
       if (user) {
         this.tokenService.saveToken(user.accessToken);
-        // localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
       }
     });
   }
@@ -41,12 +41,14 @@ export class AuthService {
       password
     });
     const user = await firstValueFrom(login$);
+    console.log('user : ', user);
     this.#userSignal.set(user);
     return user;
   }
 
   loadUserFromStorage() {
     const json = localStorage.getItem(USER_STORAGE_KEY);
+    // const json = this.tokenService.getToken()
     if (json) {
       const user = JSON.parse(json);
       this.#userSignal.set(user);
