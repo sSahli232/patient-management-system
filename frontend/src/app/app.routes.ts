@@ -6,7 +6,7 @@ import { isUserAuthenticated } from './core/auth/guards/auth.guard';
 export const routes: Routes = [
   {
     path: "login",
-    component: Auth,
+    component: Auth, // TODO: redirect to patient page when the user is already logged in.
   },
   {
     path: "patients",
