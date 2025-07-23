@@ -8,6 +8,7 @@ import { I_HASHING } from './ports/hashing.interface';
 import { RealHashing } from './adapters/real-hashing';
 import { CreateUserUseCase } from './usecases/create-user';
 import { I_ID_GENERATOR } from '../core/ports/id-generator.interface';
+import { CreateAdminUserUseCase } from './usecases/create-admin-user';
 
 @Module({
   imports: [CommonModule],
@@ -37,6 +38,13 @@ import { I_ID_GENERATOR } from '../core/ports/id-generator.interface';
       inject: [I_USER_REPOSITORY, I_ID_GENERATOR, I_HASHING],
       useFactory(userRepository, idGenerator, hashing) {
         return new CreateUserUseCase(userRepository, idGenerator, hashing);
+      },
+    },
+    {
+      provide: CreateAdminUserUseCase,
+      inject: [I_USER_REPOSITORY, I_ID_GENERATOR, I_HASHING],
+      useFactory(userRepository, idGenerator, hashing) {
+        return new CreateAdminUserUseCase(userRepository, idGenerator, hashing);
       },
     },
   ],

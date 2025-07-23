@@ -6,7 +6,7 @@ import {
 } from '../src/users/ports/user-repository.interface';
 import { e2eUsers } from './seeds/user-seeds.e2e';
 
-describe('Feature: creating a user', () => {
+describe('Feature: creating an admin patient', () => {
   let app: TestApp;
 
   beforeEach(async () => {
@@ -19,11 +19,13 @@ describe('Feature: creating a user', () => {
   });
 
   describe('Scenario: Happy path', () => {
-    it('should create a user', async () => {
-      const result = await request(app.getHttpServer()).post('/users').send({
-        email: e2eUsers.alice.entity.props.email,
-        password: e2eUsers.alice.entity.props.password,
-      });
+    it('should create an admin user', async () => {
+      const result = await request(app.getHttpServer())
+        .post('/users/admin')
+        .send({
+          email: e2eUsers.alice.entity.props.email,
+          password: e2eUsers.alice.entity.props.password,
+        });
 
       expect(result.status).toBe(201);
       expect(result.body).toEqual({
@@ -38,7 +40,7 @@ describe('Feature: creating a user', () => {
         id: result.body.id,
         email: 'alice@gmail.com',
         password: expect.any(String),
-        roles: ['user'],
+        roles: ['admin'],
       });
     });
   });
