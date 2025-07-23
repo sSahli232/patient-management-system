@@ -37,6 +37,7 @@ export class Login {
     const payload = JSON.stringify({
       id: user.props.id,
       email: user.props.email,
+      roles: user.props.roles,
     });
 
     const accessToken = await this.tokenGenerator.generate({

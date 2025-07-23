@@ -33,6 +33,7 @@ export class CreateUserUseCase {
       id,
       email,
       password: hashedPassword,
+      roles: ['user'],
     });
 
     await this.userRepository.create(user);

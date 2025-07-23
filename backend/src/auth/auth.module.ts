@@ -9,6 +9,7 @@ import { I_HASHING } from '../users/ports/hashing.interface';
 import { Authenticate } from './services/authenticate.service';
 import { APP_GUARD, Reflector } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
   imports: [UsersModule],
@@ -40,6 +41,10 @@ import { AuthGuard } from './guards/auth.guard';
       useFactory: (authenticate, reflector) => {
         return new AuthGuard(authenticate, reflector);
       },
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })

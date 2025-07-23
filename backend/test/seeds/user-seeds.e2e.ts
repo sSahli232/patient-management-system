@@ -6,6 +6,7 @@ export const e2eUsers = {
       id: 'alice-id',
       email: 'alice@gmail.com',
       password: 'azerty',
+      roles: ['admin'],
     }),
   ),
   bob: new UserFixture(
@@ -13,6 +14,7 @@ export const e2eUsers = {
       id: 'bob-id',
       email: 'bob@gmail.com',
       password: 'azerty',
+      roles: ['user'],
     }),
   ),
   aliceWithHashedPassword: new UserFixture(
@@ -20,6 +22,7 @@ export const e2eUsers = {
       id: 'alice-id',
       email: 'alice@gmail.com',
       password: '$2b$10$nxmAvbEnCj1vwIAihoIOROw07IKFlfrgtdPvW03P.KJGlWE/hI0Qa',
+      roles: ['admin'],
     }),
   ),
 };

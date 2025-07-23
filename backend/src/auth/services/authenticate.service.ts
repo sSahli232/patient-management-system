@@ -1,5 +1,5 @@
 import { User } from '../../users/entities/user.entity';
-import { IUserRepository } from '../../../dist/users/ports/user-repository.interface';
+import { IUserRepository } from '../../users/ports/user-repository.interface';
 import { ITokenGenerator } from '../ports/token-generator.interface';
 import { Injectable } from '@nestjs/common';
 

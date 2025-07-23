@@ -57,4 +57,23 @@ describe('Feature: cancelling a patient', () => {
       expect(result.status).toBe(401);
     });
   });
+
+  describe('Scenario: the user is not an admin', () => {
+    it('should reject', async () => {
+      const id = e2ePatients.johnDoe.entity.props.id;
+
+      const result = await request(app.getHttpServer())
+        .delete(`/patients/${id}`)
+        .set('Authorization', await e2eUsers.bob.createAuthorizationToken(app))
+        .send({
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'johndoe@gmail.com',
+          phoneNumber: '+33102030405',
+          dateOfBirth: new Date('1980-03-01T00:00:00.000Z'),
+        });
+
+      expect(result.status).toBe(401);
+    });
+  });
 });

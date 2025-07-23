@@ -23,12 +23,12 @@ export class UserFixture implements IFixture {
     const payload = {
       id: this.entity.props.id,
       email: this.entity.props.email,
+      roles: this.entity.props.roles,
     };
     const accessToken = await tokenGenerator.generate({
       key: JSON.stringify(payload),
       expirationInMs: 60 * 60 * 1000,
     });
-    // return `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJ7XCJpZFwiOlwiYWxpY2UtaWRcIixcImVtYWlsXCI6XCJhbGljZUBnbWFpbC5jb21cIn0iLCJpYXQiOjE3NTMyNzA1NjUsImV4cCI6MTc1MzI3NDE2NX0.B0a9wmYoAG2s5aGkgn_G2E9Sllca7YBwMpbN0oYEGI0`;
 
     return `Bearer ${accessToken}`;
   }

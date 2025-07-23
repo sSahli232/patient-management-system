@@ -38,6 +38,7 @@ describe('Feature: creating a patient', () => {
         id: result.body.id,
         email: 'alice@gmail.com',
         password: expect.any(String),
+        roles: ['user'],
       });
     });
   });

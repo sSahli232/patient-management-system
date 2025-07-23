@@ -20,6 +20,7 @@ import { GetPatientByIdResponse } from './dtos/get-patient-by-id-response';
 import { GetPatientById } from '../usecases/get-patient-by-id';
 import { GetAllPatientsResponse } from './dtos/get-all-patients-response';
 import { GetAllPatients } from '../usecases/get-all-patients';
+import { Roles } from '../../auth/decorators/roles.decorator';
 
 // TODO: improve Error Handling thanks to a NestJS filter to map domain errors.
 
@@ -33,6 +34,7 @@ export class PatientController {
     private readonly getAllPatients: GetAllPatients,
   ) {}
 
+  @Roles('admin')
   @Post('/patients')
   async handleCreatePatient(
     @Body() body: CreatePatientBody,
@@ -58,6 +60,7 @@ export class PatientController {
     return this.getPatientById.execute({ patientId: id });
   }
 
+  @Roles('admin')
   @HttpCode(200)
   @Put('/patients/:id/edit')
   async handleUpdatePatient(
@@ -74,6 +77,7 @@ export class PatientController {
     });
   }
 
+  @Roles('admin')
   @Delete('/patients/:id')
   async handleDeletePatient(
     @Param('id') id: string,
