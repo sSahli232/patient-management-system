@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   HttpCode,
   Param,
   Post,
@@ -15,6 +16,10 @@ import { UpdatePatientBody } from './dtos/update-patient-body';
 import { UpdatePatientUseCase } from '../usecases/update-patient';
 import { DeletePatientUseCase } from '../usecases/delete-patient';
 import { DeletePatientResponse } from './dtos/delete-patient-response';
+import { GetPatientByIdResponse } from './dtos/get-patient-by-id-response';
+import { GetPatientById } from '../usecases/get-patient-by-id';
+
+// TODO: improve Error Handling thanks to a NestJS filter to map domain errors.
 
 @Controller()
 export class PatientController {
@@ -22,6 +27,7 @@ export class PatientController {
     private readonly createPatient: CreatePatientUseCase,
     private readonly updatePatient: UpdatePatientUseCase,
     private readonly deletePatient: DeletePatientUseCase,
+    private readonly getPatientById: GetPatientById,
   ) {}
 
   @Post('/patients')
@@ -35,6 +41,13 @@ export class PatientController {
       phoneNumber: body.phoneNumber,
       dateOfBirth: body.dateOfBirth,
     });
+  }
+
+  @Get('/patients/:id')
+  async handleGetPatientById(
+    @Param('id') id: string,
+  ): Promise<GetPatientByIdResponse> {
+    return this.getPatientById.execute({ patientId: id });
   }
 
   @HttpCode(200)
