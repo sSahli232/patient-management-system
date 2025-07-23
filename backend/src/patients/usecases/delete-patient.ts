@@ -1,3 +1,4 @@
+import { PatientNotFoundException } from '../exceptions/patient-not-found';
 import { IPatientRepository } from '../ports/patient-repository.interface';
 
 type Request = {
@@ -12,6 +13,10 @@ export class DeletePatientUseCase {
   async execute({ patientId }: Request): Promise<Response> {
     const patient = await this.patientRepository.findById(patientId);
 
-    await this.patientRepository.delete(patient!);
+    if (!patient) {
+      throw new PatientNotFoundException();
+    }
+
+    await this.patientRepository.delete(patient);
   }
 }

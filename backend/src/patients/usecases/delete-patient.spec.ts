@@ -33,4 +33,16 @@ describe('Feature: Deleting a patient', () => {
       expect(storedPatient).toBeNull();
     });
   });
+
+  describe('Scenario: The patient does not exist', () => {
+    const payload = {
+      patientId: 'wrong-id',
+    };
+
+    it('should throw', async () => {
+      await expect(() => useCase.execute(payload)).rejects.toThrow(
+        'Patient not found',
+      );
+    });
+  });
 });
