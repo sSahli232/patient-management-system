@@ -1,0 +1,32 @@
+// .form {
+//   display: flex;
+//   flex-direction: column;
+//   max-width: 400px;
+//   margin: 0 auto;
+//   gap: 16px;
+  
+//   .field {
+//     width: 100%;
+//   }
+// }
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-dialog-actions {
+  margin-top: 16px;
+  padding: 8px 0;
+}

@@ -61,4 +61,8 @@ export class AuthService {
     this.#userSignal.set(null);
     await this.router.navigateByUrl('/login')
   }
+
+  isAdmin() {
+    return true
+  }
 }
