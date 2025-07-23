@@ -16,6 +16,10 @@ describe('Feature: cancelling a patient', () => {
     await app.loadFixtures([e2ePatients.johnDoe]);
   });
 
+  afterEach(async () => {
+    await app.cleanup();
+  });
+
   describe('Scenario: Happy path', () => {
     it('should succeed', async () => {
       const id = e2ePatients.johnDoe.entity.props.id;
