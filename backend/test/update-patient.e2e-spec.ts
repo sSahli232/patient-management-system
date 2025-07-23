@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-
 import * as request from 'supertest';
 import { TestApp } from './utils/test-app';
 import { e2ePatients } from './seeds/patient-seeds.e2e';
