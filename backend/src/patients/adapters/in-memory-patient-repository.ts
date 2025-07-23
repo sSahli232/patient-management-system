@@ -24,6 +24,10 @@ export class InMemoryPatientRepository implements IPatientRepository {
     this.database.splice(index, 1);
   }
 
+  async findAll(): Promise<Patient[]> {
+    return this.database;
+  }
+
   async findById(id: string): Promise<Patient | null> {
     const patient = this.database.find((p) => p.props.id === id);
     return patient ? new Patient({ ...patient.initialState }) : null;

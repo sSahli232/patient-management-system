@@ -18,6 +18,8 @@ import { DeletePatientUseCase } from '../usecases/delete-patient';
 import { DeletePatientResponse } from './dtos/delete-patient-response';
 import { GetPatientByIdResponse } from './dtos/get-patient-by-id-response';
 import { GetPatientById } from '../usecases/get-patient-by-id';
+import { GetAllPatientsResponse } from './dtos/get-all-patients-response';
+import { GetAllPatients } from '../usecases/get-all-patients';
 
 // TODO: improve Error Handling thanks to a NestJS filter to map domain errors.
 
@@ -28,6 +30,7 @@ export class PatientController {
     private readonly updatePatient: UpdatePatientUseCase,
     private readonly deletePatient: DeletePatientUseCase,
     private readonly getPatientById: GetPatientById,
+    private readonly getAllPatients: GetAllPatients,
   ) {}
 
   @Post('/patients')
@@ -41,6 +44,11 @@ export class PatientController {
       phoneNumber: body.phoneNumber,
       dateOfBirth: body.dateOfBirth,
     });
+  }
+
+  @Get('/patients')
+  async handleGetAllPatient(): Promise<GetAllPatientsResponse> {
+    return this.getAllPatients.execute();
   }
 
   @Get('/patients/:id')

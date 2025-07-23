@@ -10,6 +10,7 @@ import { CommonModule } from '../core/common.module';
 import { UpdatePatientUseCase } from './usecases/update-patient';
 import { DeletePatientUseCase } from './usecases/delete-patient';
 import { GetPatientById } from './usecases/get-patient-by-id';
+import { GetAllPatients } from './usecases/get-all-patients';
 
 @Module({
   imports: [CommonModule],
@@ -51,6 +52,13 @@ import { GetPatientById } from './usecases/get-patient-by-id';
       inject: [I_PATIENT_REPOSITORY],
       useFactory(patientRepository) {
         return new DeletePatientUseCase(patientRepository);
+      },
+    },
+    {
+      provide: GetAllPatients,
+      inject: [I_PATIENT_REPOSITORY],
+      useFactory(patientRepository) {
+        return new GetAllPatients(patientRepository);
       },
     },
   ],

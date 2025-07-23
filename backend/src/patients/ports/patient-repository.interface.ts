@@ -5,6 +5,7 @@ export interface IPatientRepository {
   save(patient: Patient): Promise<void>;
   update(patient: Patient): Promise<void>;
   delete(patient: Patient): Promise<void>;
+  findAll(): Promise<Patient[]>;
   findById(id: string): Promise<Patient | null>;
   findByEmailAddress(email: string): Promise<Patient | null>;
 }
