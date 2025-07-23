@@ -1,8 +1,8 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { firstValueFrom } from "rxjs";
+import type { Patient } from "../models/patient.model";
 import { environment } from "../../../../environments/environment";
-import { Patient } from "../models/patient.model";
 
 type GetPatientsResponse = Patient[];
 type GetPatientResponse = Patient;
@@ -14,7 +14,7 @@ export class PatientsService {
 
   http = inject(HttpClient);
 
-  env = environment
+  env = environment;
 
   async loadAllPatients(): Promise<Patient[]> {
     const patients$ = this.http.get<GetPatientsResponse>(`${this.env.apiUrl}/patients`);
@@ -45,6 +45,5 @@ export class PatientsService {
   async deletePatient(patientId: string) {
     const delete$ = this.http.delete(`${this.env.apiUrl}/patients/${patientId}`);
     return firstValueFrom(delete$);
-
   }
 }

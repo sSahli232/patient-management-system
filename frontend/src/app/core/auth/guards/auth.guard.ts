@@ -12,3 +12,4 @@ export const isUserAuthenticated: CanActivateFn = (route: ActivatedRouteSnapshot
     return router.parseUrl('/login');
   }
 }
+

@@ -1,13 +1,13 @@
 .patients-container {
-  max-width: 72rem; // max-w-6xl
+  max-width: 72rem;
   margin: 0 auto;
-  padding: 2.5rem 1rem; // py-10 px-4
+  padding: 2.5rem 1rem;
 
   .header {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 1.5rem; // mb-6
+    margin-bottom: 1.5rem;
     align-items: flex-start;
     justify-content: space-between;
 
@@ -19,12 +19,12 @@
     h2 {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #1f2937; // text-gray-800
+      color: #1f2937;
     }
 
     .create-button {
       width: 100%;
-      background-color: #16a34a; // bg-green-600
+      background-color: #16a34a;
       color: white;
 
       @media (min-width: 640px) {
@@ -32,12 +32,11 @@
       }
 
       &:hover {
-        background-color: #15803d; // bg-green-700
+        background-color: #15803d;
       }
     }
   }
 
-  // Mobile Cards
   .mobile-cards {
     display: flex;
     flex-direction: column;
@@ -48,7 +47,7 @@
     }
 
     .patient-card {
-      border: 1px solid #e5e7eb; // border-gray-200
+      border: 1px solid #e5e7eb;
       border-radius: 0.5rem;
       background: white;
       padding: 1rem;
@@ -63,7 +62,7 @@
         h3 {
           font-size: 1.125rem;
           font-weight: 600;
-          color: #1f2937; // text-gray-800
+          color: #1f2937;
         }
 
         .card-actions {
@@ -74,7 +73,7 @@
 
       .card-content {
         font-size: 0.875rem;
-        color: #374151; // text-gray-700
+        color: #374151;
 
         p {
           margin: 0.25rem 0;
@@ -87,7 +86,6 @@
     }
   }
 
-  // Desktop Table
   .desktop-table {
     display: none;
 
@@ -104,7 +102,7 @@
       min-width: 100%;
       border-collapse: collapse;
       font-size: 0.875rem;
-      color: #374151; // text-gray-700
+      color: #374151;
 
       th {
         padding: 1rem 1.5rem;
@@ -113,8 +111,8 @@
         font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #6b7280; // text-gray-500
-        background-color: #f9fafb; // bg-gray-50
+        color: #6b7280;
+        background-color: #f9fafb;
 
         &.actions-header {
           text-align: right;
@@ -124,7 +122,7 @@
       td {
         padding: 1rem 1.5rem;
         white-space: nowrap;
-        border-top: 1px solid #f3f4f6; // divide-y divide-gray-100
+        border-top: 1px solid #f3f4f6;
 
         &.actions-cell {
           text-align: right;
@@ -132,36 +130,35 @@
       }
 
       tr:hover {
-        background-color: #f9fafb; // hover:bg-gray-50
+        background-color: #f9fafb;
       }
     }
   }
 }
 
-// Common button styles
 .edit-button {
-  background-color: #dbeafe; // bg-blue-100
-  color: #1d4ed8; // text-blue-700
+  background-color: #dbeafe;
+  color: #1d4ed8;
   font-size: 0.75rem;
   font-weight: 500;
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
 
   &:hover {
-    background-color: #bfdbfe; // bg-blue-200
+    background-color: #bfdbfe;
   }
 }
 
 .delete-button {
-  background-color: #fee2e2; // bg-red-100
-  color: #b91c1c; // text-red-700
+  background-color: #fee2e2;
+  color: #b91c1c;
   font-size: 0.75rem;
   font-weight: 500;
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
 
   &:hover {
-    background-color: #fecaca; // bg-red-200
+    background-color: #fecaca;
   }
 }
 

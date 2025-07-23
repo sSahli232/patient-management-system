@@ -5,7 +5,6 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogMod
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { firstValueFrom } from 'rxjs';
-import { AuthService } from '../../../../core/auth/services/auth.service';
 import { PatientsService } from '../../services/patients.service';
 import type { Patient } from '../../models/patient.model';
 import { PatientDialogData } from './models/patient-dialog-form.model';
@@ -34,7 +33,6 @@ export class PatientDialogForm {
   fb = inject(FormBuilder);
 
   patientService = inject(PatientsService);
-  authService = inject(AuthService);
 
   form = this.fb.group({
     firstName: ['', Validators.required],
@@ -45,7 +43,8 @@ export class PatientDialogForm {
   });
 
   constructor() {
-    console.log('user :', this.authService.user())
+    console.log(this.data.patient?.dateOfBirth);
+
     this.form.patchValue({
       firstName: this.data.patient?.firstName,
       lastName: this.data.patient?.lastName,

@@ -6,7 +6,7 @@ import { Patients } from './features/patients/patients';
 export const routes: Routes = [
   {
     path: "login",
-    component: Auth,
+    component: Auth, // TODO: redirect to patient page when the user is already logged in.
   },
   {
     path: "patients",

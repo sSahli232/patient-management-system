@@ -4,11 +4,11 @@ import { openPatientDialog } from './components/patient-dialog-form/patient-dial
 // import { IsAdminDirective } from '../../core/directives/is-admin.directive';
 import type { Patient } from './models/patient.model';
 import { PatientsService } from './services/patients.service';
-import { PatientsTabList } from './components/patient-table-list/patient-table-list';
+import { PatientTableList } from './components/patient-table-list/patient-table-list';
 
 @Component({
   selector: 'app-patients',
-  imports: [PatientsTabList],
+  imports: [PatientTableList],
   templateUrl: './patients.html',
   styleUrl: './patients.scss'
 })
@@ -20,7 +20,7 @@ export class Patients {
   dialog = inject(MatDialog);
 
   constructor() {
-    this.loadPatients();
+    this.loadPatients().then(() => console.log(`All patients loaded:`, this.patients()));
   }
 
   async loadPatients() {
