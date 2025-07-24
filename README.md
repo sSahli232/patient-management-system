@@ -69,6 +69,20 @@ export const environment = {
 
 ### Patients
 - `GET /patients` - Get all patients
+- `GET /patients/:id` - Get a patient by its id
 - `POST /patients` - Create a new patient
 - `PUT /patients/:id` - Update a patient
 - `DELETE /patients/:id/edit` - Delete a patient
+
+### Users
+- `GET /users/:id` - Get a user by its id
+- `POST /users` - Create a new user
+- `POST /users/admin` - Create a new admin
+
+
+### Account
+I added a default admin account in memory:
+```typescript
+email: admin@mail.com
+password: azerty1234
+```
