@@ -34,7 +34,7 @@ export class Patients {
     }
   }
 
-  onPatientUpdated(updatatedPatient: Patient) {
+  async onPatientUpdated(updatatedPatient: Patient) {
     const patients = this.patients();
 
     const newPatients = patients.map(patient => patient.id === updatatedPatient.id ? updatatedPatient : patient);
